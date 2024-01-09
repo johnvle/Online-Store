@@ -9,8 +9,9 @@ export const DetailedProductView = (props) => {
       flexDirection="column"
       width="100%"
       height="100vh"
+      backgroundColor="white"
     >
-      <Card>
+      <Card >
         <Box
           display="flex"
           justifyContent="center"

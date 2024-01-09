@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Box, Typography } from "@mui/material";
+import { Stack, Container, Box, Typography } from "@mui/material";
 import { ProductCard } from "../components/ProductCard";
 
 export const MasterContainer = (props) => {
@@ -23,13 +23,11 @@ export const MasterContainer = (props) => {
 
   return (
     <>
-      <Box
+      <Stack
         sx={{
-           
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          pr: 1,
           overflow: "auto",
         }}
       >
@@ -38,7 +36,7 @@ export const MasterContainer = (props) => {
         ) : (
           <Typography>Loading...</Typography>
         )}
-      </Box>
+      </Stack>
     </>
   );
 };

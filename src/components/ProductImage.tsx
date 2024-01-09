@@ -3,10 +3,14 @@ import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 export const ProductImage = (props) => {
   return (
     <>
-      <Box>
+      <Box >
         <CardMedia
           component="img"
-          sx={{ width: 100 }}
+          sx={{
+            objectFit: "contain", // Ensures image fits while preserving aspect ratio
+            width: "100px",
+            height: "100px",
+          }}
           image={props.image}
           alt="Product Image"
         ></CardMedia>

@@ -1,40 +1,50 @@
-import { useState } from 'react';
-import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { useState } from "react";
+import {
+  Box,
+  Container,
+  Stack,
+  Grid,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { DetailedContainer } from "./containers/DetailedContainer";
 import { MasterContainer } from "./containers/MasterContainer";
 import "./App.css";
 import "./assets/fonts";
 
 function App() {
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  // manage state for clicked product 
+  // manage state for clicked product
   const [clickedProduct, setClickedProduct] = useState(null);
   const handleProductClick = (product) => {
     setClickedProduct(product);
-    console.log('PRODUCT from handleProductClick', product);
+    console.log("PRODUCT from handleProductClick", product);
   };
 
-  // IN PROGRESS: control the mobile view by checking whether the clickedProduct is true or not
+  // IN PROGRESS: control the mobile view by checking whether the clickedProduct is true
   return (
-    <Grid container spacing={2}>
-      {isMobile && !clickedProduct ? (
-        <Grid item xs={12} bgcolor="secondary.light">
-          MOBILE VIEW
-          <MasterContainer />
-        </Grid>
+    <Box display="flex" backgroundColor="pink">
+      {isMobile ? (
+        <Container>
+          {clickedProduct !== null ? (
+            <DetailedContainer product={clickedProduct} />
+          ) : (
+            <MasterContainer onProductClick={handleProductClick} />
+          )}
+        </Container>
       ) : (
         <>
-          <Grid item xs={4} >
+          <Box width={1/3} backgroundColor="black">
             <MasterContainer onProductClick={handleProductClick} />
-          </Grid>
-          <Grid item xs={8} >
+          </Box>
+          <Box width="100%">
             <DetailedContainer product={clickedProduct} />
-          </Grid>
+          </Box>
         </>
       )}
-    </Grid>
+    </Box>
   );
 }
 

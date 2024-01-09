@@ -14,9 +14,10 @@ export const ProductCard = (props) => {
         >
           <Card
             key={index}
-            onClick={() => props.onProductClick(index)} 
+            onClick={() => props.onProductClick(index)}
             sx={{
-              p: 2,
+              padding: 2,
+              maxHeight: 200,
               display: "flex",
               borderRadius: 4,
               border: "1px solid lightgray",
@@ -30,39 +31,80 @@ export const ProductCard = (props) => {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              padding="20px"
               borderRadius="5px"
               boxShadow="0 0 5px rgba(0, 0, 0, 0.3)"
             >
               <ProductImage image={product.image}></ProductImage>
             </Box>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box
+
+              sx={{ display: "flex", flexDirection: "column" }}
+            >
               <CardContent>
                 <Box>
-                  <Typography sx={{ color: "purple" }}>
-                    {product.category[0].toUpperCase()}
-                    {product.category.slice(1)}
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography sx={{ fontSize: "large" }}>
-                    {product.title}
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    color: "grey",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden",
-                  }}
-                >
-                  <Typography>{product.description}</Typography>
-                </Box>
-                <Box>
-                  <Typography sx={{ fontWeight: "bold", fontSize: "large" }}>
-                    {"$"}
-                    {product.price}
-                  </Typography>
+                  <Box id="Product Category" border={1}>
+                    <Typography sx={{ color: "purple" }}>
+                      {product.category[0].toUpperCase()}
+                      {product.category.slice(1)}
+                    </Typography>
+                  </Box>
+                  <Box
+                    id="Product Name"
+                    border={1}
+                    my={1}
+                    sx={{
+                      maxWidth: 300,
+                      maxHeight: 50,
+                      overflow: "hidden",
+                      lineHeight: "25px",
+                      whiteSpace: "normal",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: "large",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                      }}
+                    >
+                      {product.title}
+                    </Typography>
+                  </Box>
+                  <Box
+                    id="Product Desc"
+                    sx={{
+                      maxWidth: 300,
+                      maxHeight: 25,
+                      color: "grey",
+                      overflow: "hidden",
+                    }}
+                    border={1}
+                  >
+                    <Typography
+                      sx={{
+                        textOverflow: "ellipsis",
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {product.description}
+                    </Typography>
+                  </Box>
+                  <Box
+                    id="Product Price"
+                    border={1}
+                    sx={{
+                      marginTop: "16px",
+                    }}
+                  >
+                    <Typography sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                      {"$"}
+                      {product.price}
+                    </Typography>
+                  </Box>
                 </Box>
               </CardContent>
             </Box>
