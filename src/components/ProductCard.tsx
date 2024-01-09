@@ -10,9 +10,10 @@ export const ProductCard = (props) => {
           sx={{
             p: 1,
             mb: 2,
+            
           }}
         >
-          <Card
+          <Box
             key={index}
             onClick={() => props.onProductClick(index)}
             sx={{
@@ -22,7 +23,7 @@ export const ProductCard = (props) => {
               borderRadius: 4,
               border: "1px solid lightgray",
               "&:hover": {
-                boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+                boxShadow: "0 0 2px rgba(0, 0, 0, 0.5)",
                 cursor: "pointer",
               },
             }}
@@ -32,17 +33,14 @@ export const ProductCard = (props) => {
               justifyContent="center"
               alignItems="center"
               borderRadius="5px"
-              boxShadow="0 0 5px rgba(0, 0, 0, 0.3)"
+              boxShadow="0 0 2px rgba(0, 0, 0, 0.3)"
             >
               <ProductImage image={product.image}></ProductImage>
             </Box>
-            <Box
-
-              sx={{ display: "flex", flexDirection: "column" }}
-            >
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
               <CardContent>
                 <Box>
-                  <Box id="Product Category" border={1}>
+                  <Box id="Product Category">
                     <Typography sx={{ color: "purple" }}>
                       {product.category[0].toUpperCase()}
                       {product.category.slice(1)}
@@ -50,14 +48,13 @@ export const ProductCard = (props) => {
                   </Box>
                   <Box
                     id="Product Name"
-                    border={1}
+            
                     my={1}
                     sx={{
                       maxWidth: 300,
                       maxHeight: 50,
                       overflow: "hidden",
                       lineHeight: "25px",
-                      whiteSpace: "normal",
                     }}
                   >
                     <Typography
@@ -81,7 +78,7 @@ export const ProductCard = (props) => {
                       color: "grey",
                       overflow: "hidden",
                     }}
-                    border={1}
+
                   >
                     <Typography
                       sx={{
@@ -95,7 +92,7 @@ export const ProductCard = (props) => {
                   </Box>
                   <Box
                     id="Product Price"
-                    border={1}
+               
                     sx={{
                       marginTop: "16px",
                     }}
@@ -108,7 +105,7 @@ export const ProductCard = (props) => {
                 </Box>
               </CardContent>
             </Box>
-          </Card>
+          </Box>
         </Box>
       ))}
     </>

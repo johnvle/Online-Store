@@ -25,14 +25,19 @@ export const MasterContainer = (props) => {
     <>
       <Stack
         sx={{
+          margin: "2px",
+          padding: "2px",
           display: "flex",
+          height: "100vh",
           flexDirection: "column",
-          justifyContent: "center",
           overflow: "auto",
         }}
       >
         {products.length > 0 ? (
-          <ProductCard productData={products} onProductClick={props.onProductClick}></ProductCard>
+            <ProductCard
+              productData={products}
+              onProductClick={props.onProductClick}
+            ></ProductCard>
         ) : (
           <Typography>Loading...</Typography>
         )}

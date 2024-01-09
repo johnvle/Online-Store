@@ -11,7 +11,6 @@ export const EmptyView = () => {
           alignItems: "center",
           height: "100vh",
           width: "100%",
-          border: "1px solid black",
         }}
       >
         <Typography sx={{ color: "purple", fontSize: "small" }}>

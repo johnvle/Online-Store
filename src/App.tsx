@@ -25,7 +25,7 @@ function App() {
 
   // IN PROGRESS: control the mobile view by checking whether the clickedProduct is true
   return (
-    <Box display="flex" backgroundColor="pink">
+    <Box display="flex">
       {isMobile ? (
         <Container>
           {clickedProduct !== null ? (
@@ -36,7 +36,7 @@ function App() {
         </Container>
       ) : (
         <>
-          <Box width={1/3} backgroundColor="black">
+          <Box width={1 / 3} sx={{ borderRight: "1px solid lightgray" }}>
             <MasterContainer onProductClick={handleProductClick} />
           </Box>
           <Box width="100%">
