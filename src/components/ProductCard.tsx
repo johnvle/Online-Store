@@ -1,49 +1,74 @@
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { ProductImage } from "./ProductImage";
 
 export const ProductCard = (props) => {
-  console.log(props.productData);
-
-  const testProduct = props.productData[0];
-  console.log("product data:", props.productData[0]);
-
   return (
-    <Box width="90%" sx={{ p: 2, border: "5px dashed black" }}>
-      <Card sx={{ display: "flex" }}>
-        <Box>
-          <CardMedia
-            component="img"
-            sx={{ width: 100 }}
-            image={testProduct.image}
-            alt="Live from space album cover"
-          />
-        </Box>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <CardContent>
-            <Typography sx={{ color: "purple", fontSize: "medium" }}>
-              {testProduct.category}
-            </Typography>
-            <Typography
-              sx={{
-                fontWeight: "bold",
-                fontSize: "large",
-              }}
+    <>
+      {props.productData.map((product, index) => (
+        <Box
+          key={index}
+          sx={{
+            p: 1,
+            mb: 2,
+          }}
+        >
+          <Card
+            key={index}
+            onClick={() => props.onProductClick(index)} 
+            sx={{
+              p: 2,
+              display: "flex",
+              borderRadius: 4,
+              border: "1px solid lightgray",
+              "&:hover": {
+                boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+                cursor: "pointer",
+              },
+            }}
+          >
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              padding="20px"
+              borderRadius="5px"
+              boxShadow="0 0 5px rgba(0, 0, 0, 0.3)"
             >
-              {testProduct.title}
-            </Typography>
-            <Typography
-              sx={{
-                color: "grey",
-                textOverflow: "ellipsis",
-              }}
-            >
-              {testProduct.description}
-            </Typography>
-            <Typography sx={{ fontWeight: "bolder", fontSize: "large" }}>
-              {testProduct.price}
-            </Typography>
-          </CardContent>
+              <ProductImage image={product.image}></ProductImage>
+            </Box>
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
+              <CardContent>
+                <Box>
+                  <Typography sx={{ color: "purple" }}>
+                    {product.category[0].toUpperCase()}
+                    {product.category.slice(1)}
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography sx={{ fontSize: "large" }}>
+                    {product.title}
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    color: "grey",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                  }}
+                >
+                  <Typography>{product.description}</Typography>
+                </Box>
+                <Box>
+                  <Typography sx={{ fontWeight: "bold", fontSize: "large" }}>
+                    {"$"}
+                    {product.price}
+                  </Typography>
+                </Box>
+              </CardContent>
+            </Box>
+          </Card>
         </Box>
-      </Card>
-    </Box>
+      ))}
+    </>
   );
 };

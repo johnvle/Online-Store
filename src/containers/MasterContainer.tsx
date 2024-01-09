@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { Typography } from "@mui/material";
+import { Container, Box, Typography } from "@mui/material";
 import { ProductCard } from "../components/ProductCard";
 
-export const MasterContainer = () => {
+export const MasterContainer = (props) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -13,7 +13,6 @@ export const MasterContainer = () => {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
-        console.log("DATAAAA", data);
         setProducts(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -23,12 +22,23 @@ export const MasterContainer = () => {
   }, []);
 
   return (
-    <div>
-      {products.length > 0 ? (
-        <ProductCard productData={products}></ProductCard>
-      ) : (
-        <Typography>Loading...</Typography>
-      )}
-    </div>
+    <>
+      <Box
+        sx={{
+           
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          pr: 1,
+          overflow: "auto",
+        }}
+      >
+        {products.length > 0 ? (
+          <ProductCard productData={products} onProductClick={props.onProductClick}></ProductCard>
+        ) : (
+          <Typography>Loading...</Typography>
+        )}
+      </Box>
+    </>
   );
 };
