@@ -1,20 +1,28 @@
 import { useState } from "react";
-import {
-  Box,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { DetailedContainer } from "./containers/DetailedContainer";
 import { MasterContainer } from "./containers/MasterContainer";
 import "./App.css";
 import "./assets/fonts";
 
+
+
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+}
+
 function App() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   // manage state for clicked product
-  const [clickedProduct, setClickedProduct] = useState(null);
-  const handleProductClick = (product) => {
+  const [clickedProduct, setClickedProduct] = useState<Product | null>(null);
+
+  const handleProductClick = (product: Product) => {
     setClickedProduct(product);
     console.log("ARG from handleProductClick", product);
   };
@@ -23,16 +31,19 @@ function App() {
   return (
     <Box display="flex" justifyContent="center">
       {isMobile ? (
-        <Box display="flex" >
+        <Box display="flex">
           {clickedProduct !== null ? (
-            <DetailedContainer product={clickedProduct} onProductBack={handleProductClick}/>
+            <DetailedContainer
+              product={clickedProduct}
+              onProductBack={handleProductClick}
+            />
           ) : (
             <MasterContainer onProductClick={handleProductClick} />
           )}
         </Box>
       ) : (
         <>
-          <Box width={2/5} sx={{ borderRight: "1px solid lightgray" }}>
+          <Box width={2 / 5} sx={{ borderRight: "1px solid lightgray" }}>
             <MasterContainer onProductClick={handleProductClick} />
           </Box>
           <Box width="100%">

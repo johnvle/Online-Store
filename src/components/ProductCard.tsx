@@ -1,19 +1,25 @@
 import { useState } from "react";
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { ProductImage } from "./ProductImage";
 
-export const ProductCard = (props) => {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+}
 
-  const handleProductClick = (index) => {
+interface Props {
+  productData: Product[];
+  onProductClick: (index: number) => void;
+}
+
+export const ProductCard = (props: Props) => {
+  const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
+
+  const handleProductClick = (index: number) => {
     setSelectedProduct(index);
     props.onProductClick(index);
   };
@@ -25,7 +31,7 @@ export const ProductCard = (props) => {
 
   return (
     <>
-      {props.productData.map((product, index) => (
+      {props.productData.map((product: Product, index: number) => (
         <Box
           key={index}
           sx={{

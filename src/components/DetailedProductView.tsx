@@ -12,14 +12,32 @@ import {
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-export const DetailedProductView = (props) => {
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+}
+
+interface DetailedProductViewProps {
+  productData: Product;
+  onProductBack: (value: null) => void;
+}
+
+export const DetailedProductView = (props: DetailedProductViewProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const imageHeight = isMobile ? 250 : 300;
   const titleSize = isMobile ? "20px" : "32px";
-  const descHeight = isMobile ? "null" : "100px";
-  const mobileOverflow = isMobile ? "null" : "auto";
+  // const descHeight = isMobile ? "null" : "100px";
+  // const mobileOverflow = isMobile ? "null" : "auto";
   const mobileIcon = isMobile ? "relative" : "normal";
 
   const product = props.productData;

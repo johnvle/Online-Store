@@ -7,8 +7,21 @@ import {
 import { ProductCard } from "../components/ProductCard";
 import Loading from "../utility-components/loading";
 
-export const MasterContainer = (props) => {
-  const [products, setProducts] = useState([]);
+interface Props {
+  onProductClick: (index: number) => void; 
+}
+
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+}
+
+export const MasterContainer = (props : Props) => {
+  const [products, setProducts] = useState<Product[]>([]);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -22,7 +35,7 @@ export const MasterContainer = (props) => {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
-        setProducts(data);
+        setProducts(data as Product[]); 
       } catch (error) {
         console.error("Error fetching data:", error);
       }
