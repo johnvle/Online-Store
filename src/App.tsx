@@ -20,23 +20,23 @@ function App() {
   const [clickedProduct, setClickedProduct] = useState(null);
   const handleProductClick = (product) => {
     setClickedProduct(product);
-    console.log("PRODUCT from handleProductClick", product);
+    console.log("ARG from handleProductClick", product);
   };
 
   // IN PROGRESS: control the mobile view by checking whether the clickedProduct is true
   return (
-    <Box display="flex">
+    <Box display="flex" justifyContent="center">
       {isMobile ? (
-        <Container>
+        <Box display="flex" >
           {clickedProduct !== null ? (
-            <DetailedContainer product={clickedProduct} />
+            <DetailedContainer product={clickedProduct} onProductBack={handleProductClick}/>
           ) : (
             <MasterContainer onProductClick={handleProductClick} />
           )}
-        </Container>
+        </Box>
       ) : (
         <>
-          <Box width={1 / 3} sx={{ borderRight: "1px solid lightgray" }}>
+          <Box width={2/5} sx={{ borderRight: "1px solid lightgray" }}>
             <MasterContainer onProductClick={handleProductClick} />
           </Box>
           <Box width="100%">

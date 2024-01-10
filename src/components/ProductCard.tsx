@@ -1,7 +1,21 @@
-import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { ProductImage } from "./ProductImage";
 
 export const ProductCard = (props) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const maxCardHeight = isMobile ? 150 : 200;
+  const maxCardWidth = isMobile ? 300 : "100%";
+  const cardTextWidth = isMobile ? 150 : "100%";
+
   return (
     <>
       {props.productData.map((product, index) => (
@@ -9,8 +23,6 @@ export const ProductCard = (props) => {
           key={index}
           sx={{
             p: 1,
-            mb: 2,
-            
           }}
         >
           <Box
@@ -18,9 +30,11 @@ export const ProductCard = (props) => {
             onClick={() => props.onProductClick(index)}
             sx={{
               padding: 2,
-              maxHeight: 200,
+              maxHeight: maxCardHeight,
+              maxWidth: maxCardWidth,
+              overflow: "clip",
               display: "flex",
-              borderRadius: 4,
+              borderRadius: 2,
               border: "1px solid lightgray",
               "&:hover": {
                 boxShadow: "0 0 2px rgba(0, 0, 0, 0.5)",
@@ -29,16 +43,21 @@ export const ProductCard = (props) => {
             }}
           >
             <Box
+              height="150px"
               display="flex"
-              justifyContent="center"
               alignItems="center"
               borderRadius="5px"
               boxShadow="0 0 2px rgba(0, 0, 0, 0.3)"
             >
-              <ProductImage image={product.image}></ProductImage>
+              <ProductImage rating={product.rating} image={product.image}></ProductImage>
             </Box>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <CardContent>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  pl:2,
+                }}
+              >
                 <Box>
                   <Box id="Product Category">
                     <Typography sx={{ color: "purple" }}>
@@ -48,10 +67,10 @@ export const ProductCard = (props) => {
                   </Box>
                   <Box
                     id="Product Name"
-            
                     my={1}
                     sx={{
-                      maxWidth: 300,
+                      maxWidth: { md: 100, lg: 200, xl: 400 },
+
                       maxHeight: 50,
                       overflow: "hidden",
                       lineHeight: "25px",
@@ -73,18 +92,20 @@ export const ProductCard = (props) => {
                   <Box
                     id="Product Desc"
                     sx={{
-                      maxWidth: 300,
+                      maxWidth: { sm: "5px", md: 100, lg: 200, xl: 300 },
+                      width: cardTextWidth,
                       maxHeight: 25,
                       color: "grey",
                       overflow: "hidden",
                     }}
-
                   >
                     <Typography
                       sx={{
                         textOverflow: "ellipsis",
                         overflow: "hidden",
                         whiteSpace: "nowrap",
+                        fontWeight: "Light"
+
                       }}
                     >
                       {product.description}
@@ -92,19 +113,17 @@ export const ProductCard = (props) => {
                   </Box>
                   <Box
                     id="Product Price"
-               
                     sx={{
                       marginTop: "16px",
                     }}
                   >
-                    <Typography sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                    <Typography sx={{ fontWeight: "bold", fontSize: "20px" }}>
                       {"$"}
                       {product.price}
                     </Typography>
                   </Box>
                 </Box>
-              </CardContent>
-            </Box>
+              </Box>
           </Box>
         </Box>
       ))}

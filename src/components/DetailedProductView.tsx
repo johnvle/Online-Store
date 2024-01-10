@@ -5,10 +5,23 @@ import {
   CardMedia,
   Typography,
   Stack,
+  useMediaQuery,
+  useTheme,
+  IconButton,
 } from "@mui/material";
 
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
 export const DetailedProductView = (props) => {
-  console.log("PRODUCT DATA", props.productData);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const imageHeight = isMobile ? 250 : 300;
+  const titleSize = isMobile ? "20px" : "32px";
+  const descHeight = isMobile ? "null" : "100px";
+  const mobileOverflow = isMobile ? "null" : "auto";
+  const mobileIcon = isMobile ? "relative" : "normal";
+
   const product = props.productData;
   return (
     <Box
@@ -16,9 +29,24 @@ export const DetailedProductView = (props) => {
       flexDirection="column"
       height="100vh"
       backgroundColor="white"
-      padding="40px"
+      padding="20px"
     >
-      <Box>
+      <Box position={mobileIcon}>
+        {isMobile && (
+          <IconButton
+            sx={{
+              borderRadius: "50%",
+              position: "absolute",
+              top: 25,
+              left: 25,
+              zIndex: 1,
+              boxShadow: "0 0 2px rgba(0, 0, 0, 0.5)",
+            }}
+            onClick={() => props.onProductBack(null)}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+        )}
         <Box
           id="Product Media"
           display="flex"
@@ -26,12 +54,12 @@ export const DetailedProductView = (props) => {
           m="16px"
           sx={{
             padding: "20px",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)"
+            boxShadow: "0 0 2px rgba(0, 0, 0, 0.5)",
           }}
         >
           <CardMedia
             component="img"
-            sx={{ width: "30%", height: "300px", objectFit: "contain" }}
+            sx={{ py:3, width: "100%", height: imageHeight, objectFit: "contain" }}
             image={product.image}
             alt="Product Image"
           ></CardMedia>
@@ -42,36 +70,47 @@ export const DetailedProductView = (props) => {
             display="flex"
             flexDirection="column"
             justify-content="space-between"
-            height="300px"
+            height="350px"
           >
             <Box>
               <Typography
-                sx={{ color: "purple", fontWeight: "bold", fontSize: "large" }}
+                sx={{ color: "purple", fontWeight: "regular", fontSize: "large" }}
               >
                 {product.category[0].toUpperCase()}
                 {product.category.slice(1)}
               </Typography>
             </Box>
             <Box id="Product Name">
-              <Typography sx={{ fontSize: "32px" }}>{product.title}</Typography>
+              <Typography sx={{ fontSize: titleSize }}>
+                {product.title}
+              </Typography>
             </Box>
             <Box
               id="Product Description"
+              display="flex"
               sx={{
-                height: "80px",
+                maxHeight: descHeight,
                 marginTop: "4px",
-                py: "2px",
+                py: "px",
                 color: "grey",
-                overflow: "auto",
-                lineHeight: "25px",
+                overflow: mobileOverflow,
               }}
             >
-              <Typography>{product.description}</Typography>
+              <Typography
+                sx={{
+                  color: "grey",
+                  overflow: mobileOverflow,
+                  textOverflow: mobileOverflow,
+                  fontWeight: "Light"
+                }}
+              >
+                {product.description}
+              </Typography>
             </Box>
             <Box
               id="Product Rating"
               display="flex"
-              mt="20px"
+              mt="12px"
               align-items="center"
             >
               <Rating
@@ -89,9 +128,10 @@ export const DetailedProductView = (props) => {
             <Box
               sx={{
                 marginTop: "auto",
+                py: "30px",
               }}
             >
-              <Typography sx={{ fontWeight: "bold", fontSize: "24px" }}>
+              <Typography sx={{ fontWeight: "medium", fontSize: "24px" }}>
                 {"$"}
                 {product.price}
               </Typography>

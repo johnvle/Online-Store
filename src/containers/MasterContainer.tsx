@@ -1,9 +1,21 @@
 import { useState, useEffect } from "react";
-import { Stack, Container, Box, Typography } from "@mui/material";
+import {
+  Stack,
+  Container,
+  Box,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { ProductCard } from "../components/ProductCard";
+import Loading from "../utility-components/loading";
 
 export const MasterContainer = (props) => {
   const [products, setProducts] = useState([]);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const mobileOverflow = isMobile ? "normal" : "auto";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,16 +42,16 @@ export const MasterContainer = (props) => {
           display: "flex",
           height: "100vh",
           flexDirection: "column",
-          overflow: "auto",
+          overflow: mobileOverflow,
         }}
       >
         {products.length > 0 ? (
-            <ProductCard
-              productData={products}
-              onProductClick={props.onProductClick}
-            ></ProductCard>
+          <ProductCard
+            productData={products}
+            onProductClick={props.onProductClick}
+          ></ProductCard>
         ) : (
-          <Typography>Loading...</Typography>
+          <Loading></Loading>
         )}
       </Stack>
     </>

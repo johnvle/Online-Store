@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { EmptyView } from "../components/EmptyView";
 import { DetailedProductView } from "../components/DetailedProductView";
+import Loading from "../utility-components/loading";
 
 export const DetailedContainer = (props) => {
   const [productDetail, setProductDetail] = useState(null);
@@ -44,10 +45,10 @@ export const DetailedContainer = (props) => {
         <EmptyView></EmptyView>
       ) : (
         <Box>
-          {productDetail ? ( 
-            <DetailedProductView productData={productDetail} />
+          {productDetail ? (
+            <DetailedProductView onProductBack={props.onProductBack} productData={productDetail} />
           ) : (
-            <Typography>Loading...</Typography>
+            <Loading></Loading>
           )}
         </Box>
       )}
