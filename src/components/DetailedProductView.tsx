@@ -114,6 +114,7 @@ export const DetailedProductView = (props) => {
               align-items="center"
             >
               <Rating
+                readOnly
                 name="product-rating-rounded-nearest-whole"
                 value={Math.round(product.rating.rate)}
               />{" "}

@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import {
   Stack,
-  Container,
-  Box,
-  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";

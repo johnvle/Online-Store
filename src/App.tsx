@@ -1,10 +1,6 @@
 import { useState } from "react";
 import {
   Box,
-  Container,
-  Stack,
-  Grid,
-  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
