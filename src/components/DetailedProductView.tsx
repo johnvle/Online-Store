@@ -53,6 +53,7 @@ export const DetailedProductView = (props) => {
           justifyContent="center"
           m="16px"
           sx={{
+            borderRadius: "10px",
             padding: "20px",
             boxShadow: "0 0 2px rgba(0, 0, 0, 0.5)",
           }}
@@ -69,7 +70,6 @@ export const DetailedProductView = (props) => {
             id="Product Info Stack"
             display="flex"
             flexDirection="column"
-            justify-content="space-between"
             height="350px"
           >
             <Box>
@@ -89,19 +89,19 @@ export const DetailedProductView = (props) => {
               id="Product Description"
               display="flex"
               sx={{
-                maxHeight: descHeight,
+                // maxHeight: descHeight,
                 marginTop: "4px",
                 py: "px",
                 color: "grey",
-                overflow: mobileOverflow,
+                // overflow: mobileOverflow,
               }}
             >
               <Typography
                 sx={{
                   color: "grey",
-                  overflow: mobileOverflow,
-                  textOverflow: mobileOverflow,
-                  fontWeight: "Light"
+                  // overflow: mobileOverflow,
+                  // textOverflow: mobileOverflow,
+                  fontWeight: "light"
                 }}
               >
                 {product.description}
@@ -110,7 +110,7 @@ export const DetailedProductView = (props) => {
             <Box
               id="Product Rating"
               display="flex"
-              mt="12px"
+              mt="40px"
               align-items="center"
             >
               <Rating
@@ -127,8 +127,8 @@ export const DetailedProductView = (props) => {
             </Box>
             <Box
               sx={{
-                marginTop: "auto",
-                py: "30px",
+                marginTop: "40px",
+                // py: "30px",
               }}
             >
               <Typography sx={{ fontWeight: "medium", fontSize: "24px" }}>

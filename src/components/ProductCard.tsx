@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Card,
@@ -10,6 +11,12 @@ import {
 import { ProductImage } from "./ProductImage";
 
 export const ProductCard = (props) => {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleProductClick = (index) => {
+    setSelectedProduct(index);
+    props.onProductClick(index);
+  };
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const maxCardHeight = isMobile ? 150 : 200;
@@ -27,7 +34,7 @@ export const ProductCard = (props) => {
         >
           <Box
             key={index}
-            onClick={() => props.onProductClick(index)}
+            onClick={() => handleProductClick(index)}
             sx={{
               padding: 2,
               maxHeight: maxCardHeight,
@@ -35,9 +42,13 @@ export const ProductCard = (props) => {
               overflow: "clip",
               display: "flex",
               borderRadius: 2,
-              border: "1px solid lightgray",
+              borderColor: selectedProduct === index ? "purple" : "initial",
+              borderStyle: selectedProduct === index ? "solid" : "none",
+              borderWidth: "1px",
+              boxShadow: "0 0 2px rgba(0, 0, 0, 0.2)",
               "&:hover": {
-                boxShadow: "0 0 2px rgba(0, 0, 0, 0.5)",
+                boxShadow:
+                  selectedProduct === index ? "" : "0 0 2px rgba(0, 0, 0, 0.5)",
                 cursor: "pointer",
               },
             }}
@@ -49,81 +60,83 @@ export const ProductCard = (props) => {
               borderRadius="5px"
               boxShadow="0 0 2px rgba(0, 0, 0, 0.3)"
             >
-              <ProductImage rating={product.rating} image={product.image}></ProductImage>
+              <ProductImage
+                rating={product.rating}
+                image={product.image}
+              ></ProductImage>
             </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  pl:2,
-                }}
-              >
-                <Box>
-                  <Box id="Product Category">
-                    <Typography sx={{ color: "purple" }}>
-                      {product.category[0].toUpperCase()}
-                      {product.category.slice(1)}
-                    </Typography>
-                  </Box>
-                  <Box
-                    id="Product Name"
-                    my={1}
-                    sx={{
-                      maxWidth: { md: 100, lg: 200, xl: 400 },
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                pl: 2,
+              }}
+            >
+              <Box>
+                <Box id="Product Category">
+                  <Typography sx={{ color: "purple" }}>
+                    {product.category[0].toUpperCase()}
+                    {product.category.slice(1)}
+                  </Typography>
+                </Box>
+                <Box
+                  id="Product Name"
+                  my={1}
+                  sx={{
+                    maxWidth: { md: 100, lg: 200, xl: 400 },
 
-                      maxHeight: 50,
-                      overflow: "hidden",
-                      lineHeight: "25px",
-                    }}
-                  >
-                    <Typography
-                      sx={{
-                        fontSize: "large",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                      }}
-                    >
-                      {product.title}
-                    </Typography>
-                  </Box>
-                  <Box
-                    id="Product Desc"
+                    maxHeight: 50,
+                    overflow: "hidden",
+                    lineHeight: "25px",
+                  }}
+                >
+                  <Typography
                     sx={{
-                      maxWidth: { sm: "5px", md: 100, lg: 200, xl: 300 },
-                      width: cardTextWidth,
-                      maxHeight: 25,
-                      color: "grey",
+                      fontSize: "large",
                       overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
                     }}
                   >
-                    <Typography
-                      sx={{
-                        textOverflow: "ellipsis",
-                        overflow: "hidden",
-                        whiteSpace: "nowrap",
-                        fontWeight: "Light"
-
-                      }}
-                    >
-                      {product.description}
-                    </Typography>
-                  </Box>
-                  <Box
-                    id="Product Price"
+                    {product.title}
+                  </Typography>
+                </Box>
+                <Box
+                  id="Product Desc"
+                  sx={{
+                    maxWidth: { sm: "5px", md: 100, lg: 200, xl: 300 },
+                    width: cardTextWidth,
+                    maxHeight: 25,
+                    color: "grey",
+                    overflow: "hidden",
+                  }}
+                >
+                  <Typography
                     sx={{
-                      marginTop: "16px",
+                      textOverflow: "ellipsis",
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      fontWeight: "Light",
                     }}
                   >
-                    <Typography sx={{ fontWeight: "bold", fontSize: "20px" }}>
-                      {"$"}
-                      {product.price}
-                    </Typography>
-                  </Box>
+                    {product.description}
+                  </Typography>
+                </Box>
+                <Box
+                  id="Product Price"
+                  sx={{
+                    marginTop: "16px",
+                  }}
+                >
+                  <Typography sx={{ fontWeight: "bold", fontSize: "20px" }}>
+                    {"$"}
+                    {product.price}
+                  </Typography>
                 </Box>
               </Box>
+            </Box>
           </Box>
         </Box>
       ))}

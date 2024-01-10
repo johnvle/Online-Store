@@ -15,7 +15,7 @@ export const ProductImage = (props) => {
             borderRadius: "50px",
             position: "absolute",
             top: 90,
-            right: 0,
+            right: 5,
             zIndex: 1,
             scale: "70%",
             background: "white",
@@ -34,9 +34,10 @@ export const ProductImage = (props) => {
           </Typography>
         </Box>
         <CardMedia
-          border={1}
+
           component="img"
           sx={{
+            px: 1,
             objectFit: "contain", // Ensures image fits while preserving aspect ratio
             width: "100px",
             height: "100px",
