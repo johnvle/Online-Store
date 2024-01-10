@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { DetailedContainer } from "./containers/DetailedContainer";
+import { MasterContainer } from "./containers/MasterContainer";
+import "./App.css";
+import "./assets/fonts";
+import { Product } from "./components/types/Product.interface";
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  // manage state for clicked product
+  const [clickedProduct, setClickedProduct] = useState<Product | null>(null);
 
+  const handleProductClick = (product: Product) => {
+    setClickedProduct(product);
+    console.log("ARG from handleProductClick", product);
+  };
+
+  // IN PROGRESS: control the mobile view by checking whether the clickedProduct is true
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Box display="flex" justifyContent="center">
+      {isMobile ? (
+        <Box display="flex">
+          {clickedProduct !== null ? (
+            <DetailedContainer
+              product={clickedProduct}
+              onProductBack={handleProductClick}
+            />
+          ) : (
+            <MasterContainer onProductClick={handleProductClick} />
+          )}
+        </Box>
+      ) : (
+        <>
+          <Box width={2 / 5} sx={{ borderRight: "1px solid lightgray" }}>
+            <MasterContainer onProductClick={handleProductClick} />
+          </Box>
+          <Box width="100%">
+            <DetailedContainer product={clickedProduct} />
+          </Box>
+        </>
+      )}
+    </Box>
+  );
 }
 
-export default App
+export default App;
