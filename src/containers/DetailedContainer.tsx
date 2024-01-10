@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { EmptyView } from "../components/EmptyView";
 import { DetailedProductView } from "../components/DetailedProductView";
 import Loading from "../utility-components/loading";
+
+// type enforce props and useState
 
 export const DetailedContainer = (props) => {
   const [productDetail, setProductDetail] = useState(null);

@@ -4,17 +4,8 @@ import { DetailedContainer } from "./containers/DetailedContainer";
 import { MasterContainer } from "./containers/MasterContainer";
 import "./App.css";
 import "./assets/fonts";
+import { Product } from "./components/types/Product.interface";
 
-
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-}
 
 function App() {
   const theme = useTheme();

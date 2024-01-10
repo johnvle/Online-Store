@@ -1,15 +1,7 @@
 import { useState } from "react";
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { ProductImage } from "./ProductImage";
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-}
+import { Product } from "./types/Product.interface";
 
 interface Props {
   productData: Product[];
@@ -25,6 +17,7 @@ export const ProductCard = (props: Props) => {
   };
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  
   const maxCardHeight = isMobile ? 150 : 200;
   const maxCardWidth = isMobile ? 300 : "100%";
   const cardTextWidth = isMobile ? 150 : "100%";

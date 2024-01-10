@@ -1,26 +1,13 @@
 import { useState, useEffect } from "react";
-import {
-  Stack,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Stack, useMediaQuery, useTheme } from "@mui/material";
 import { ProductCard } from "../components/ProductCard";
 import Loading from "../utility-components/loading";
-
+import { Product } from "../components/types/Product.interface";
 interface Props {
-  onProductClick: (index: number) => void; 
+  onProductClick: (index: number) => void;
 }
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-}
-
-export const MasterContainer = (props : Props) => {
+export const MasterContainer = (props: Props) => {
   const [products, setProducts] = useState<Product[]>([]);
 
   const theme = useTheme();
@@ -35,7 +22,7 @@ export const MasterContainer = (props : Props) => {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
-        setProducts(data as Product[]); 
+        setProducts(data as Product[]);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
